@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbarList %}
+<li class="nav-item">
+    <a class="nav-link" href="/home">Home</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="/generate">Content Generation</a>
+</li>
+{% endblock navbarList %}
+
+{% block content %}
+<div class="">
+    <form method="post" class="">
+        {% csrf_token %}
+        <section class="">
+            <div class="py-5">
+                <div class="row row-cols-1 row-cols-md-1 g-1">
+                    <div class="col col-lg-6">
+                        <div class="shadow card bg-white " style="border-radius: 0.5rem; color: #faa96b; ">
+                            <div class="card-body">
+
+                                {% block HTMLformfields %}
+                                <div>
+                                    <h3 class="fw-bold mb-2 text-uppercase">Content Generator</h3>
+                                    <div class="border-top">
+                                        <div class="col col-8">
+                                            <div class="form-group my-3">
+                                                <label for="prompt_input">Prompt</label>
+                                                <select type="text" id="prompt_input" class="form-control js-example-tags" placeholder="Select Question"
+                                                        name="prompt" required>
+                                                    <option value="">Select or enter Question/Prompt</option>
+                                                    {% for prompt in prompts %}
+                                                    <option>{{prompt}}</option>
+                                                    {% endfor %}
+                                                </select>
+
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label for="domain_input">Domain</label>
+                                                <select type="text" id="domain_input" class="form-control js-example-tags" placeholder="Select Domain/s"
+                                                        name="domain">
+                                                    <option value="">Select or enter Domain/s</option>
+                                                    {% for domain in domains %}
+                                                    <option>{{domain}}</option>
+                                                    {% endfor %}
+                                                </select>
+
+
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label for="region_input">Region</label>
+                                                <select type="text" id="region_input" class="form-control js-example-tags" placeholder="Select Region/s"
+                                                        name="region">
+                                                    <option value="">Select or enter Region/s</option>
+                                                    {% for code, country in country_codes.items %}
+                                                    <option value="{{code|lower}}">{{country}}</option>
+                                                    {% endfor %}
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <button class="btn btn-outline-secondary btn-lg-5 px-5 my-3" type="submit">Submit</button>
+                                </div>
+
+                                {% endblock HTMLformfields %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-lg-6">
+                        <div class="shadow card bg-white">
+                            <button type="button" class="btn btn-outline-primary btn-sm pb-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <i class="bi bi-download"></i>
+                            </button>
+                            {% include 'main/download_popup.html' %}
+                            <span class="m-3">{{content|safe}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </form>
+    <div>
+
+
+        {% endblock content %}
+
+
+        {% block jquery %}
+        $(".js-example-tags").select2({
+        tags: true
+        });
+        {% endblock jquery %}

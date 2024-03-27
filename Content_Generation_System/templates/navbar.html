@@ -1,0 +1,69 @@
+{% load static %}
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #faa96b; ">
+  <div class="container-fluid fs-6">
+    <a class="navbar-brand fs-4" href="/home">
+      <img src="{% static 'logos/logo.png' %}" alt="" width="100" height="60" class="d-inline-block align-text-center">
+      </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% block navbarList %}
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/generate">Content Generation</a>
+            </li>
+            {% endblock navbarList %}
+        </ul>
+
+      <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+
+        {% if user.is_staff %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="navbar-text">
+              Logged in as {{user.username}}
+            </span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            {% if user.is_superuser  %}
+            <li><a class="dropdown-item" href="/admin/">Admin Portal</a></li>
+            {% endif %}
+            <li><a class="dropdown-item" href="/password_change/">Change Password</a></li>
+
+            {% comment %}<li><a class="dropdown-item" href="#">Something else here</a></li> {% endcomment %}
+          </ul>
+        </li>
+        {% else %}
+        <span class="navbar-text">
+          Logged in as {{user.username}} |
+        </span>
+        {% endif %}
+        <li class="nav-item">
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Logout</button>
+            </form>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+<div id="loader" class="bg-image text-center fixed-top" style="display: none;">
+  <img src="{% static 'logos/aibackgroundpicolo.gif' %}" class="w-auto"/>
+  <div class="mask" style="background-color: rgba(0, 0, 0, 0.5)"></div>
+</div>
+{% endblock navbar %}

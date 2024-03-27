@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{% endblock title %}
+
+
+
+{% block content %}
+<div>
+<form method="post" class="container">
+  {% csrf_token %}
+  <section class="text-center m-auto">
+    <div class="container py-5">
+      <div class="row">
+        {% comment %} <div class="col-12 col-md-8 col-lg-6 col-xl-5"> {% endcomment %}
+          
+            <div class="row g-0 d-flex">
+              {% comment %} <div class="col-lg-4 d-none d-lg-flex">
+                <img src="{% static 'static/logos/aiimg.jpg' %}" alt="Trendy Pants and Shoes"
+                  class="w-100" />
+              </div> {% endcomment %}
+            
+                            <div class="shadow card col col-md-5 mx-auto bg-white" style="border-radius: 0.5rem; color: #faa96b; ">
+                                {% comment %}style="color: #faa96b; "{% endcomment %}
+                                <div class="card-body p-3 text-center">
+
+                                    {% block HTMLformfields %}
+                                    <div>
+                                        <h1 class="fw-bold mb-2 text-uppercase">Company Name</h1>
+                                        <p class="text-black-50 mb-3">Please enter your login username and password!</p>
+                                        {% if form.errors %}
+                                        <div class="alert alert-warning" role="alert">
+                                            Username and Password does not match!
+                                        </div>
+                                        {% endif %}
+                                        <div class="border-top">
+                                            <div class="col col-7 mx-auto">
+                                                <div class="form-outline form-black mb-4 mt-4">
+                                                    <input type="text" id="typeUsernameX" class="form-control form-control-lg" placeholder="Username"
+                                                           name="username" />
+                                                    <label for="typeUsernameX" class="visually-hidden">Username</label>
+                                                </div>
+
+                                                <div class="form-outline form-black mb-4">
+                                                    <input type="password" id="typePasswordX" class="form-control form-control-lg" placeholder="Password"
+                                                           name="password" />
+                                                    <label for="typePasswordX" class="visually-hidden">Password</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% comment %} {{form|crispy}} {% endcomment %}
+                                        <p class="small mb-3 pb-lg-2"><a class="text-black-50" href="/password_reset/">Forgot password?</a></p>
+
+                                        <button class="btn btn-outline-secondary btn-lg px-5" type="submit">Login</button>
+                                    </div>
+
+                                    <!--<div>
+          <p class="mb-0">Don't have an account? <a href="#!" class="text-black-50 fw-bold">Sign Up</a>
+          </p>
+        </div>-->
+                                    {% endblock HTMLformfields %}
+
+
+                                </div>
+
+                            </div>
+          </div>
+        {% comment %} </div> {% endcomment %}
+      </div>
+    </div>
+  </section>
+
+</form>
+<div>
+
+{% endblock content %}
