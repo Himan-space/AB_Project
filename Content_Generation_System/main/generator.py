@@ -59,7 +59,7 @@ def generate_content_piece(input_prompt: str, country_code: str, specific_domain
     res = ""
     for line in response:
         line = line.decode()
-        # print(line)
+        print(line)
         if 'event: update' in line:
             parts = line.split('data: ')
             for x in parts:

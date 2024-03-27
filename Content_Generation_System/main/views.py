@@ -26,7 +26,7 @@ def index(request):
         file_path_md = "static/data/output.md"
         # Write the content to the file
         with open(file_path_md, "w") as file:
-            file.write(content)
+            file.write(content_str)
         
         file_path = "static/data/output.txt"
         # Write the content to the file

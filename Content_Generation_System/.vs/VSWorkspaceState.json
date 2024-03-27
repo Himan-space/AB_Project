@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Content_Generation_System",
+    "\\main",
+    "\\static\\logs",
+    "\\templates",
+    "\\templates\\main",
+    "\\templates\\registration"
+  ],
+  "SelectedNode": "\\main\\urls.py",
+  "PreviewInSolutionExplorer": false
+}
